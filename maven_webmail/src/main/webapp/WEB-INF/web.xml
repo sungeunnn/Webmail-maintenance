@@ -26,6 +26,16 @@
         <servlet-name>ReadMailHandler</servlet-name>
         <servlet-class>cse.maven_webmail.control.ReadMailHandler</servlet-class>
     </servlet>
+    <!--메일 삭제 서블릿-->
+    <servlet>
+        <servlet-name>DeleteMail</servlet-name>
+        <servlet-class>cse.maven_webmail.control.DeleteMail</servlet-class>
+    </servlet>
+    <!--메일 복구 서블릿-->
+    <servlet>
+        <servlet-name>RestoreMail</servlet-name>
+        <servlet-class>cse.maven_webmail.control.RestoreMail</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginHandler</servlet-name>
         <url-pattern>/Login.do</url-pattern>
@@ -41,6 +51,15 @@
     <servlet-mapping>
         <servlet-name>ReadMailHandler</servlet-name>
         <url-pattern>/ReadMail.do</url-pattern>
+    </servlet-mapping>
+    <!--메일 삭제 복구 -->
+    <servlet-mapping>
+        <servlet-name>DeleteMail</servlet-name>
+        <url-pattern>/delete_mail.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RestoreMail</servlet-name>
+        <url-pattern>/restore_mail.do</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

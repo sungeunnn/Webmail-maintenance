@@ -15,24 +15,20 @@ root {
 }
 
 body {
-    background-color: rgb(200, 251, 196);
+    background-color: whitesmoke;
     /* background-image: url(/webmail2010/images/bg_image.jpg); */
 }
 
 table {
-    margin: 0px 15px 0 15px;
-    border: thin solid black;
+    border-collapse: collapse; text-align: left; line-height: 1.5; margin : 20px 10px;
 }
 
-td, th {
-    border: 1px solid black;
-    text-align: center;
-    padding: 5px;
+td {
+     padding: 10px; vertical-align: top; border: 1px solid #ccc;
 }
 
 th {
-    background-color:  gray;
-    color: white;
+    width: 150px; padding: 10px; font-weight: bold; vertical-align: top; border: 1px solid #ccc; background: #aee7fa;
 }
 
 
@@ -93,20 +89,21 @@ td#subject {
 }
 
 #msgBody {
-    background-color: yellow;
+    background-color: white;
+    width: 800px;
 }
 
 a:link {
-
+    color: black;
 }
 
 a:visited {
-    color: blue;
+    color: black;
 }
 
 a:hover {
-    color:  aqua;
-    background: fuchsia;
+    color:  black;
+    background: white;
 }
 
 #footer {

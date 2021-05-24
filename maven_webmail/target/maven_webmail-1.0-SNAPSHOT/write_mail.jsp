@@ -1,6 +1,7 @@
 <%-- 
     Document   : write_mail.jsp
     Author     : jongmin
+    기능 : 메일 쓰기
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -31,7 +32,7 @@
                     <tr>
                         <td> 수신 </td>
                         <td> <input type="text" name="to" size="80"
-                                    value=<%=request.getParameter("recv") == null ? "" : request.getParameter("recv")%>>  </td>
+                                    value=<%=request.getParameter("reciver") == null ? "" : request.getParameter("reciver")%>>  </td>
                     </tr>
                     <tr>
                         <td>참조</td>
