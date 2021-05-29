@@ -26,7 +26,7 @@
         </div>
                <div id="main">
             <form enctype="multipart/form-data" method="POST"
-                  action="TemMail.do?menu=<%= CommandType.SEND_MAIL_COMMAND%>" >
+                  action="WriteMail.do?menu=<%= CommandType.SEND_MAIL_COMMAND%>" >
                 <table>
                     
                     <%
