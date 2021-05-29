@@ -1,9 +1,9 @@
 <%-- 
-    Document   : delete_send_mail
-    Created on : 2021. 5. 23., 오후 6:28:01
-    Author     : ldh22
-    기능 : 보낸 메일함 삭제 
+    Document   : delete_temmail
+    Created on : 2021. 5. 28., 오전 4:10:58
+    Author     : yoon
 --%>
+
 <%@page import="java.sql.DriverManager"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.sql.Connection"%>
@@ -14,7 +14,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
     </head>
-    <body>
+ <body>
         <%
             
             Connection conn = null;
@@ -25,7 +25,7 @@
                         String dbPassword = "jspteamproject!!!";
             Class.forName("com.mysql.cj.jdbc.Driver");
             conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
-            String sql = "DELETE FROM SENT_MAILBOX WHERE receiver=? and subject=? and date =?";
+            String sql = "DELETE FROM tem_mail WHERE receiver=? and subject=? and date =?";
             psmt = conn.prepareStatement(sql);
             
             psmt.setString(1, request.getParameter("receiver"));
@@ -38,7 +38,7 @@
             if (check >= 1) {%>
         <script>
             alert('삭제되었습니다!');
-            location.href = "send_mail.jsp";
+            location.href = "save_mail.jsp";
         </script>
         <%
         } else {%>

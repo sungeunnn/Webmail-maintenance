@@ -49,9 +49,9 @@
                         PreparedStatement psmt = null;
 
                         String userid = (String) session.getAttribute("userid");
-                        String dbURL = "jdbc:mysql://172.28.16.1:3306/james2?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul";
-                        String dbID = "james2users";
-                        String dbPassword = "1234";
+                        String dbURL = "jdbc:mysql://192.168.35.168:3306/jspmail?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul";
+                        String dbID = "jspmail";
+                        String dbPassword = "jspteamproject!!!";
                         Class.forName("com.mysql.jdbc.Driver");
                         conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
                         String sql = "SELECT* FROM trash WHERE receiver=?";

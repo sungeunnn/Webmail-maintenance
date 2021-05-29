@@ -21,6 +21,7 @@
         <p> <a href="main_menu.jsp"> 받은 메일함 </a> </p>
         <p> <a href="send_mail.jsp"> 보낸 메일함 </a> </p>
         <p> <a href="write_mail.jsp"> 메일 쓰기 </a> </p>
+        <p> <a href="save_mail.jsp"> 임시보관함 </a> </p>
         <p> <a href="trash.jsp"> 휴지통 </a> </p>
         <p><a href="Login.do?menu=<%= CommandType.LOGOUT %>">로그아웃</a></p>
     </body>

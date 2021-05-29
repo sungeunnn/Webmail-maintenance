@@ -36,6 +36,10 @@
         <servlet-name>RestoreMail</servlet-name>
         <servlet-class>cse.maven_webmail.control.RestoreMail</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>TemMailHandler</servlet-name>
+        <servlet-class>cse.maven_webmail.control.TemMailHandler</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginHandler</servlet-name>
         <url-pattern>/Login.do</url-pattern>
@@ -60,6 +64,10 @@
     <servlet-mapping>
         <servlet-name>RestoreMail</servlet-name>
         <url-pattern>/restore_mail.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TemMailHandler</servlet-name>
+        <url-pattern>/TemMail.do</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -1,32 +1,32 @@
 /*
- * To change this template, choose Tools | Templates
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 package cse.maven_webmail.control;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import cse.maven_webmail.model.FormParser;
 import cse.maven_webmail.model.SmtpAgent;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author jongmin
- * 메일 쓰기 기능
+ * @author yoon
  */
-public class WriteMailHandler extends HttpServlet {
+public class TemMailHandler extends HttpServlet {
 
-    int count = 0;
+        int count = 0;
     FormParser parser;
     PrintWriter out = null;
     Connection conn = null;
@@ -44,12 +44,12 @@ public class WriteMailHandler extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-
-        try ( PrintWriter out = response.getWriter()) {
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
             request.setCharacterEncoding(StandardCharsets.UTF_8.name());
             int select = Integer.parseInt(request.getParameter("menu"));
 
-            if (select == CommandType.SEND_MAIL_COMMAND) { // 실제 메일 전송하기
+            if (select == CommandType.TEM_MAIL_COMMAND) { // 실제 메일 전송하기
                 boolean status = sendMessage(request);
                 // 2.  request 객체에서 HttpSession 객체 얻기
                 HttpSession session = (HttpSession) request.getSession();
@@ -76,6 +76,7 @@ public class WriteMailHandler extends HttpServlet {
                 if (receiver.contains(",")) {
                     String[] receivers = receiver.split(",");
                     write(userid, receivers, cc, subject, body);
+                    
                 } else {
                     write(userid, receiver, cc, subject, body);
                 }
@@ -84,12 +85,12 @@ public class WriteMailHandler extends HttpServlet {
                 out.println("없는 메뉴를 선택하셨습니다. 어떻게 이 곳에 들어오셨나요?");
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            e.printStackTrace(); 
         }
     }
-
-    public int getNext() { // 인덱스 늘리기 기능
-        String SQL = "SELECT idx FROM `jspmail`.`SENT_MAILBOX` ORDER BY idx DESC";
+    
+public int getNext() { // 인덱스 늘리기 기능
+        String SQL = "SELECT idx FROM `jspmail`.`tem_mail` ORDER BY idx DESC";
         try {
             PreparedStatement pstmt = conn.prepareStatement(SQL);
             rs = pstmt.executeQuery();
@@ -110,7 +111,7 @@ public class WriteMailHandler extends HttpServlet {
                         String dbPassword = "jspteamproject!!!";
             conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
             Class.forName("com.mysql.cj.jdbc.Driver");
-            String SQL = "INSERT INTO `jspmail`.`SENT_MAILBOX` (`idx`, `username`, `receiver`, `cc`, `subject`, `body`) VALUES (?,?,?,?,?,?);";
+            String SQL = "INSERT INTO `jspmail`.`tem_mail` (`idx`, `username`, `receiver`, `cc`, `subject`, `body`) VALUES (?,?,?,?,?,?);";
             PreparedStatement pstmt = conn.prepareStatement(SQL);
 
             pstmt.setInt(1, getNext());
@@ -121,12 +122,16 @@ public class WriteMailHandler extends HttpServlet {
             pstmt.setString(6, body);
 
             pstmt.executeUpdate();
+            
         } catch (Exception e) {
             e.printStackTrace();
         }
         //return -1;//데이터베이스 오류  
     }
 
+  
+    
+    
     public void write(String userID, String[] receivers, String cc, String subject, String body) {
         try {
                         String dbURL = "jdbc:mysql://192.168.35.168:3306/jspmail?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul";
@@ -134,7 +139,7 @@ public class WriteMailHandler extends HttpServlet {
                         String dbPassword = "jspteamproject!!!";
             conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
             Class.forName("com.mysql.cj.jdbc.Driver");
-            String SQL = "INSERT INTO `jspmail`.`SENT_MAILBOX` (`idx`, `username`, `receiver`, `cc` ,`subject`, `body`) VALUES (?,?,?,?,?,?);";
+            String SQL = "INSERT INTO `jspmail`.`tem_mail` (`idx`, `username`, `receiver`, `cc` ,`subject`, `body`) VALUES (?,?,?,?,?,?);";
             PreparedStatement pstmt = conn.prepareStatement(SQL);
 
             for (int i = 0; i < receivers.length; i++) {
@@ -153,8 +158,6 @@ public class WriteMailHandler extends HttpServlet {
         //return -1;//데이터베이스 오류  
     }
 
-  
-    
     private boolean sendMessage(HttpServletRequest request) {
         boolean status = false;
 
@@ -177,7 +180,7 @@ public class WriteMailHandler extends HttpServlet {
         agent.setSubj(parser.getSubject());
         agent.setBody(parser.getBody());
         String fileName = parser.getFileName();
-        System.out.println("WriteMailHandler.sendMessage() : fileName = " + fileName);
+        System.out.println("TemMailHandler.sendMessage() : fileName = " + fileName);
         if (fileName != null) {
             agent.setFile1(fileName);
         }
@@ -216,8 +219,7 @@ public class WriteMailHandler extends HttpServlet {
         successPopUp.append("</body></html>");
         return successPopUp.toString();
     }
-
-// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -230,7 +232,6 @@ public class WriteMailHandler extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-
     }
 
     /**
@@ -245,7 +246,6 @@ public class WriteMailHandler extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-
     }
 
     /**
@@ -256,6 +256,6 @@ public class WriteMailHandler extends HttpServlet {
     @Override
     public String getServletInfo() {
         return "Short description";
-
     }// </editor-fold>
+
 }
