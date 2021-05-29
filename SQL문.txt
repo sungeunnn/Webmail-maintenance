@@ -21,3 +21,15 @@ CREATE TABLE `trash` (
   `body` varchar(2048) DEFAULT NULL,
   PRIMARY KEY (`idx`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8
+
+
+CREATE TABLE `tem_mail` (
+  `idx` int NOT NULL,
+  `username` varchar(64) DEFAULT NULL,
+  `receiver` varchar(64) DEFAULT NULL,
+  `cc` varchar(64) DEFAULT NULL,
+  `subject` varchar(100) DEFAULT NULL,
+  `date` datetime DEFAULT CURRENT_TIMESTAMP,
+  `body` varchar(2048) DEFAULT NULL,
+  PRIMARY KEY (`idx`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3
