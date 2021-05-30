@@ -34,9 +34,9 @@
                 PreparedStatement psmt = null;
                 int count = 0;
 
-                        String dbURL = "jdbc:mysql://192.168.35.168:3306/jspmail?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul";
-                        String dbID = "jspmail";
-                        String dbPassword = "jspteamproject!!!";
+                        String dbURL = "jdbc:mysql://192.168.32.65:3306/james2?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul";
+                        String dbID = "james2user";
+                        String dbPassword = "qwerty123456";
                 Class.forName("com.mysql.cj.jdbc.Driver");
                 conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
                 String sql = "SELECT * FROM trash WHERE subject=? and date=?";

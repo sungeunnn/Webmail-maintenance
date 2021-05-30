@@ -18,6 +18,8 @@ import cse.maven_webmail.model.UserAdminAgent;
  * @author jongmin
  */
 public class UserAdminHandler extends HttpServlet {
+    String userID;
+    String passWD;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,58 +33,111 @@ public class UserAdminHandler extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            HttpSession session = request.getSession();
-            String userid = (String) session.getAttribute("userid");
-            if (userid == null || !userid.equals("admin")) {
-                out.println("현재 사용자(" + userid + ")의 권한으로 수행 불가합니다.");
-                out.println("<a href=/WebMailSystem/> 초기 화면으로 이동 </a>");
-                return;
-            } else {
+        PrintWriter out = null;
+        HttpSession session = request.getSession();
+        userID=(String)session.getAttribute("userid");
+        passWD=(String)session.getAttribute("password");
+        
+        try {
+            request.setCharacterEncoding("UTF-8");
+            int select = Integer.parseInt((String) request.getParameter("menu"));
 
-                request.setCharacterEncoding("UTF-8");
-                int select = Integer.parseInt((String) request.getParameter("menu"));
+            switch (select) {
+                case CommandType.ADD_USER_COMMAND:
+                    out = response.getWriter();
+                    addUser(request, response, out);
+                    break;
 
-                switch (select) {
-                    case CommandType.ADD_USER_COMMAND:
-                        addUser(request, response, out);
-                        break;
+                case CommandType.DELETE_USER_COMMAND:
+                    out = response.getWriter();
+                    deleteUser(request, response, out);
+                    break;
 
-                    case CommandType.DELETE_USER_COMMAND:
-                        deleteUser(request, response, out);
-                        break;
-
-                    default:
-                        out.println("없는 메뉴를 선택하셨습니다. 어떻게 이 곳에 들어오셨나요?");
-                        break;
-                }
+                default:
+                    out = response.getWriter();
+                    out.println("없는 메뉴를 선택하셨습니다. 어떻게 이 곳에 들어오셨나요?");
+                    break;
             }
         } catch (Exception ex) {
-            System.err.println(ex.toString());
+            out.println(ex.toString());
+        } finally {
+            out.close();
         }
     }
+  
+          
 
     private void addUser(HttpServletRequest request, HttpServletResponse response, PrintWriter out) {
         String server = "127.0.0.1";
         int port = 4555;
         try {
-            UserAdminAgent agent = new UserAdminAgent(server, port, this.getServletContext().getRealPath("."));
+            UserAdminAgent agent = new UserAdminAgent(server, port , this.getServletContext().getRealPath("."));
             String userid = request.getParameter("id");  // for test
             String password = request.getParameter("password");// for test
             out.println("userid = " + userid + "<br>");
             out.println("password = " + password + "<br>");
             out.flush();
-            // if (addUser successful)  사용자 등록 성공 팦업창
-            // else 사용자 등록 실패 팝업창
+            // if (addUser successful)  사용자 등록, 회원가입 성공 팦업창
+            // else 사용자 등록, 회원가입 실패 팝업창
             if (agent.addUser(userid, password)) {
-                out.println(getUserRegistrationSuccessPopUp());
+                if (userID == null || !userID.equals("admin")){
+                    out.println(getUserSignupSuccessPopUp());
+                }else{
+                    out.println(getUserRegistrationSuccessPopUp());
+                }   
             } else {
-                out.println(getUserRegistrationFailurePopUp());
+                if (userID == null || !userID.equals("admin")){
+                    out.println(getUserSignupFailurePopUp());
+                }else{
+                    out.println(getUserRegistrationFailurePopUp());
+                }     
             }
             out.flush();
         } catch (Exception ex) {
             out.println("시스템 접속에 실패했습니다.");
         }
+    }
+    
+     private String getUserSignupSuccessPopUp() {
+        String alertMessage = "회원가입이 성공했습니다.";
+        StringBuilder successPopUp = new StringBuilder();
+        successPopUp.append("<html>");
+        successPopUp.append("<head>");
+
+        successPopUp.append("<title>메일 전송 결과</title>");
+        successPopUp.append("<link type=\"text/css\" rel=\"stylesheet\" href=\"css/main_style.css\" />");
+        successPopUp.append("</head>");
+        successPopUp.append("<body onload=\"goMainMenu()\">");
+        successPopUp.append("<script type=\"text/javascript\">");
+        successPopUp.append("function goMainMenu() {");
+        successPopUp.append("alert(\"");
+        successPopUp.append(alertMessage);
+        successPopUp.append("\"); ");
+        successPopUp.append("window.location = \"index.jsp\"; ");
+        successPopUp.append("}  </script>");
+        successPopUp.append("</body></html>");
+        return successPopUp.toString();
+    }
+
+    private String getUserSignupFailurePopUp() {
+        String alertMessage = "회원가입이 실패했습니다.";
+        StringBuilder successPopUp = new StringBuilder();
+        successPopUp.append("<html>");
+        successPopUp.append("<head>");
+
+        successPopUp.append("<title>메일 전송 결과</title>");
+        successPopUp.append("<link type=\"text/css\" rel=\"stylesheet\" href=\"css/main_style.css\" />");
+        successPopUp.append("</head>");
+        successPopUp.append("<body onload=\"goMainMenu()\">");
+        successPopUp.append("<script type=\"text/javascript\">");
+        successPopUp.append("function goMainMenu() {");
+        successPopUp.append("alert(\"");
+        successPopUp.append(alertMessage);
+        successPopUp.append("\"); ");
+        successPopUp.append("window.location = \"index.jsp\"; ");
+        successPopUp.append("}  </script>");
+        successPopUp.append("</body></html>");
+        return successPopUp.toString();
     }
 
     private String getUserRegistrationSuccessPopUp() {

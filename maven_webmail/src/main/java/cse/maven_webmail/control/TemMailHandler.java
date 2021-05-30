@@ -90,7 +90,7 @@ public class TemMailHandler extends HttpServlet {
     }
     
 public int getNext() { // 인덱스 늘리기 기능
-        String SQL = "SELECT idx FROM `jspmail`.`tem_mail` ORDER BY idx DESC";
+        String SQL = "SELECT idx FROM `james2`.`tem_mail` ORDER BY idx DESC";
         try {
             PreparedStatement pstmt = conn.prepareStatement(SQL);
             rs = pstmt.executeQuery();
@@ -106,12 +106,12 @@ public int getNext() { // 인덱스 늘리기 기능
 
     public void write(String userID, String receiver, String cc, String subject, String body) {
         try {
-                        String dbURL = "jdbc:mysql://192.168.35.168:3306/jspmail?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul";
-                        String dbID = "jspmail";
-                        String dbPassword = "jspteamproject!!!";
+                        String dbURL = "jdbc:mysql://192.168.32.65:3306/james2?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul";
+                        String dbID = "james2user";
+                        String dbPassword = "qwerty123456";
             conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
             Class.forName("com.mysql.cj.jdbc.Driver");
-            String SQL = "INSERT INTO `jspmail`.`tem_mail` (`idx`, `username`, `receiver`, `cc`, `subject`, `body`) VALUES (?,?,?,?,?,?);";
+            String SQL = "INSERT INTO `james2`.`tem_mail` (`idx`, `username`, `receiver`, `cc`, `subject`, `body`) VALUES (?,?,?,?,?,?);";
             PreparedStatement pstmt = conn.prepareStatement(SQL);
 
             pstmt.setInt(1, getNext());
@@ -134,12 +134,12 @@ public int getNext() { // 인덱스 늘리기 기능
     
     public void write(String userID, String[] receivers, String cc, String subject, String body) {
         try {
-                        String dbURL = "jdbc:mysql://192.168.35.168:3306/jspmail?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul";
-                        String dbID = "jspmail";
-                        String dbPassword = "jspteamproject!!!";
+                        String dbURL = "jdbc:mysql://192.168.32.65:3306/james2?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul";
+                        String dbID = "james2user";
+                        String dbPassword = "qwerty123456";
             conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
             Class.forName("com.mysql.cj.jdbc.Driver");
-            String SQL = "INSERT INTO `jspmail`.`tem_mail` (`idx`, `username`, `receiver`, `cc` ,`subject`, `body`) VALUES (?,?,?,?,?,?);";
+            String SQL = "INSERT INTO `james2`.`tem_mail` (`idx`, `username`, `receiver`, `cc` ,`subject`, `body`) VALUES (?,?,?,?,?,?);";
             PreparedStatement pstmt = conn.prepareStatement(SQL);
 
             for (int i = 0; i < receivers.length; i++) {

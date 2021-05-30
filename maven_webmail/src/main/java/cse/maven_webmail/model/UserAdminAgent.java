@@ -6,6 +6,7 @@ package cse.maven_webmail.model;
 
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -31,6 +32,31 @@ public class UserAdminAgent {
     private String ADMIN_ID; //  = "admin";
     private final String EOL = "\r\n";
     String cwd;
+    
+    public UserAdminAgent(){}
+    public String getServer() {
+        return server;
+    }
+
+    public void setServer(String server) {
+        this.server = server;
+    }
+
+    public int getPort() {
+        return port;
+    }
+
+    public void setPort(int port) {
+        this.port = port;
+    }
+
+    public String getCwd() {
+        return cwd;
+    }
+
+    public void setCwd(String cwd) {
+        this.cwd = cwd;
+    }
 
     public UserAdminAgent(String server, int port, String cwd) throws Exception {
         System.out.println("UserAdminAgent created: server = " + server + ", port = " + port);
@@ -46,22 +72,29 @@ public class UserAdminAgent {
 
         isConnected = connect();
     }
+    
+    
 
-    private void initialize() {
-        // property 읽는 방법 맞는지? getClass().getResourceAsStream() 사용해 보면...
-        Properties props = new Properties();
+    private void initialize() throws FileNotFoundException {
+         //property 읽는 방법 맞는지? getClass().getResourceAsStream() 사용해 보면...
         String propertyFile =  this.cwd + "/WEB-INF/classes/config/system.properties";
+               // +getClass().getResourceAsStream( "../config/system.properties");
+        
         propertyFile = propertyFile.replace("\\", "/");
         System.out.printf("prop path = %s%n", propertyFile);
+        //InputStream bis  = getClass().getResourceAsStream(propertyFile);
+        
+        FileInputStream bis = new FileInputStream(propertyFile);
+        Properties props = new Properties();
+        //System.out.printf("%s%n", propertyFile);
 
-        try (BufferedInputStream bis =
-                new BufferedInputStream(
-                        new FileInputStream(propertyFile))) {
-            props.load(bis);
+        try {
+            props.load(new BufferedInputStream(bis));
             ROOT_ID = props.getProperty("root_id");
             ROOT_PASSWORD = props.getProperty("root_password");
             ADMIN_ID = props.getProperty("admin_id");
             System.out.printf("ROOT_ID = %s\nROOT_PASS = %s\n", ROOT_ID, ROOT_PASSWORD);
+
         } catch (IOException ioe) {
             System.out.println("UserAdminAgent: 초기화 실패 - " + ioe.getMessage());
         }
@@ -136,6 +169,7 @@ public class UserAdminAgent {
             quit();
         } catch (Exception ex) {
             System.err.println(ex);
+            //System.out.println("오류가 발생했습니다 : "+ex.getMessage());
         } finally {
             return userList;
         }
@@ -145,10 +179,13 @@ public class UserAdminAgent {
         List<String> userList = new LinkedList<String>();
 
         // 1: 줄 단위로 나누기
-        String[] lines = message.split(EOL);
+        
+        String[] lines = message.split("\n");
+        
         // 2: 첫 번째 줄에는 등록된 사용자 수에 대한 정보가 있음.
         //    예) Existing accounts 7
         String[] firstLine = lines[0].split(" ");
+        //System.out.println(firstLine[2]);
         int numberOfUsers = Integer.parseInt(firstLine[2]);
 
         // 3: 두 번째 줄부터는 각 사용자 ID 정보를 보여줌.
