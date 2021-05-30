@@ -92,7 +92,7 @@
                 </td>
                 <td>
                     <form action="write_mail.jsp" method="POST">
-                        <input type="hidden" name="recv" value="${row.email}">
+                        <input type="hidden" name="reciver" value="${row.email}">
                         <input type="submit" value="메일전송">
                     </form>
                 </td>
