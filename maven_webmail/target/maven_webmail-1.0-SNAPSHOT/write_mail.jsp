@@ -37,8 +37,17 @@
                 <table>
                     <tr>
                         <td> 수신 </td>
-                        <td> <input type="text"  name="to" size="80" id="to"
-                                    value=<%=request.getParameter("reciver") == null ? "" : request.getParameter("reciver")%>>  </td>
+                        <td> 
+<!--                            <input type="text"  name="to" size="80" id="to"
+                                   value=<%=request.getParameter("reciver") == null ? "" : request.getParameter("reciver")%>>  -->
+                            <% if(CommandType.grp_state == false) {%>
+                            <input type="text" name="to" size="80" id="to"
+                                    value=<%=
+                                        request.getParameter("reciver") == null ? "" : request.getParameter("reciver")%>>  
+                            <% } else if(CommandType.grp_state == true){ CommandType.grp_state = false; %>
+                            <input type="text" name="to" size="80" id="to"
+                                    value=<%=CommandType.rcv_emails%>>  <% } %>
+                        </td>
                     </tr>
                     <tr>
                         <td>참조</td>

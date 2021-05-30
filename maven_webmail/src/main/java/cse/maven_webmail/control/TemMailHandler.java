@@ -106,9 +106,9 @@ public int getNext() { // 인덱스 늘리기 기능
 
     public void write(String userID, String receiver, String cc, String subject, String body) {
         try {
-                        String dbURL = "jdbc:mysql://192.168.32.65:3306/james2?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul";
+                        String dbURL = "jdbc:mysql://192.168.0.2:3306/james2?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul";
                         String dbID = "james2user";
-                        String dbPassword = "qwerty123456";
+                        String dbPassword = "kangsuna1234";
             conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
             Class.forName("com.mysql.cj.jdbc.Driver");
             String SQL = "INSERT INTO `james2`.`tem_mail` (`idx`, `username`, `receiver`, `cc`, `subject`, `body`) VALUES (?,?,?,?,?,?);";
@@ -134,9 +134,9 @@ public int getNext() { // 인덱스 늘리기 기능
     
     public void write(String userID, String[] receivers, String cc, String subject, String body) {
         try {
-                        String dbURL = "jdbc:mysql://192.168.32.65:3306/james2?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul";
+                        String dbURL = "jdbc:mysql://192.168.0.2:3306/james2?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul";
                         String dbID = "james2user";
-                        String dbPassword = "qwerty123456";
+                        String dbPassword = "kangsuna1234";
             conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
             Class.forName("com.mysql.cj.jdbc.Driver");
             String SQL = "INSERT INTO `james2`.`tem_mail` (`idx`, `username`, `receiver`, `cc` ,`subject`, `body`) VALUES (?,?,?,?,?,?);";

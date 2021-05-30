@@ -40,6 +40,14 @@
         <servlet-name>TemMailHandler</servlet-name>
         <servlet-class>cse.maven_webmail.control.TemMailHandler</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddrBookHandler</servlet-name>
+        <servlet-class>cse.maven_webmail.control.AddrBookHandler</servlet-class>
+    </servlet>
+     <servlet>
+        <servlet-name>GroupHandler</servlet-name>
+        <servlet-class>cse.maven_webmail.control.GroupHandler</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginHandler</servlet-name>
         <url-pattern>/Login.do</url-pattern>
@@ -68,6 +76,14 @@
     <servlet-mapping>
         <servlet-name>TemMailHandler</servlet-name>
         <url-pattern>/TemMail.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddrBookHandler</servlet-name>
+        <url-pattern>/AddrBook.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GroupHandler</servlet-name>
+        <url-pattern>/Group.do</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
