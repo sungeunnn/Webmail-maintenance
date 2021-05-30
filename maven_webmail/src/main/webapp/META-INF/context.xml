@@ -2,8 +2,8 @@
 <Context path="/maven_webmail">
     <Resource auth="Container" driverClassName="com.mysql.cj.jdbc.Driver"
               maxIdle="2" maxTotal="8" maxWaitMillis="5000" name="jdbc/AddrBookDB"
-              username="james2user" password="kangsuna1234" type="javax.sql.DataSource"
-              url="jdbc:mysql://localhost:3306/james2?serverTimezone=Asia/Seoul" />
+              username="yoonjsp" password="jspteamproject!!!" type="javax.sql.DataSource"
+              url="jdbc:mysql://34.64.170.168:3306/jspmail?serverTimezone=Asia/Seoul" />
     
     <!--<ResourceLink global="jdbc/AddrBookDB" name="jdbc/AddrBookDB" type="javax.sql.DataSource" />-->
 </Context>

@@ -39,9 +39,9 @@ public class DeleteMail extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
             // 데이터베이스 연결
-                        String dbURL = "jdbc:mysql://192.168.0.2:3306/james2?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul";
-                        String dbID = "james2user";
-                        String dbPassword = "kangsuna1234";
+                        String dbURL = "jdbc:mysql://34.64.170.168:3306/jspmail?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul";
+                        String dbID = "yoonjsp";
+                        String dbPassword = "jspteamproject!!!";
             // 파라미터 불러오기
             String receiver = request.getParameter("receiver");
             String title = request.getParameter("title");

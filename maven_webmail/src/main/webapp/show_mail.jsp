@@ -35,9 +35,9 @@
                 PreparedStatement psmt = null;
                 int count = 0;
 
-                        String dbURL = "jdbc:mysql://192.168.0.2:3306/james2?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul";
-                        String dbID = "james2user";
-                        String dbPassword = "kangsuna1234";
+                        String dbURL = "jdbc:mysql://34.64.170.168:3306/jspmail?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul";
+                        String dbID = "yoonjsp";
+                        String dbPassword = "jspteamproject!!!";
                 Class.forName("com.mysql.cj.jdbc.Driver");
                 conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
                 String sql = "SELECT * FROM SENT_MAILBOX WHERE subject=? and date=? and receiver=?";
