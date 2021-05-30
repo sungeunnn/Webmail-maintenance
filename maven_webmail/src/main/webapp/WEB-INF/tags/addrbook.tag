@@ -43,14 +43,12 @@
         <tr>
             <td>그룹 </td>  
             <td> 
-                <c:if test="${!empty group_rs.rows}" >
                     <select name="grpName" id="grpName" style="width:160px;">
                         <option value="없음" selected="">미지정</option>
                         <c:forEach var="row" items="${group_rs.rows}" varStatus="i">
                             <option value="${row.group_name}">${row.group_name}</option>
                         </c:forEach>
                     </select>
-                </c:if>
                 <br> 
             </td>
         </tr>
@@ -70,7 +68,6 @@
             <th>ID</th>
             <th>전화번호</th>
             <th>그룹</th>
-            <!--            <th>수정</th>-->
             <th>삭제</th>
             <th>메일전송</th>
         </tr>
