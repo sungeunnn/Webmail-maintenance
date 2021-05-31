@@ -28,10 +28,9 @@
         <div id="msgBody">
 
             <%
-                String userid = (String) session.getAttribute("userid");
                 String title = request.getParameter("title");
                 String date = request.getParameter("date");
-                
+                String receiver = request.getParameter("receiver");
                 Connection conn = null;
                 PreparedStatement psmt = null;
                 int count = 0;
@@ -46,7 +45,7 @@
                 psmt = conn.prepareStatement(sql);
                 psmt.setString(1, title);
                 psmt.setString(2, date);
-                psmt.setString(3, userid);
+                psmt.setString(3, receiver);
                 
                 ResultSet rs = psmt.executeQuery();
                 

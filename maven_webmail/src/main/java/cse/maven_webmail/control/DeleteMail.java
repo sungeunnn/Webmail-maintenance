@@ -43,10 +43,12 @@ public class DeleteMail extends HttpServlet {
                         String dbID = "yoonjsp";
                         String dbPassword = "jspteamproject!!!";
             // 파라미터 불러오기
+            
             String receiver = request.getParameter("receiver");
             String title = request.getParameter("title");
             String date = request.getParameter("date");
             int check = 0;// DB Success or Fail Check
+            
             // 데이터 베이스 연결 및 쿼리문
             conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
             Class.forName("com.mysql.cj.jdbc.Driver");
