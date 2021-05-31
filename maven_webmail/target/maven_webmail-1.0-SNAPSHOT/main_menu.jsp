@@ -77,7 +77,6 @@
                             out.println("<td>" + "<a href=show_mail.jsp?title=" + URLEncoder.encode(rs.getString("subject"),"UTF-8") + "&date=" +
                                     URLEncoder.encode(rs.getString("date"),"UTF-8")  +">" + rs.getString("subject") + "</a>" + "</td>");
                             out.println("<td>" + rs.getString("date") + "</td>");
-//                            out.println("<td>" + "<a href=delete_mail.do?&title="+ URLEncoder.encode(rs.getString("subject"),"UTF-8") + "&date=" + URLEncoder.encode(rs.getString("date"),"UTF-8") + ">" + "삭제" + "</a>" + "</td>");
                             out.println("<td>" + "<a href=delete_mail.do?receiver=" + URLEncoder.encode(rs.getString("receiver"),"UTF-8") + "&title="
                             + URLEncoder.encode(rs.getString("subject"),"UTF-8") + "&date=" + URLEncoder.encode(rs.getString("date"),"UTF-8") + ">" + "삭제" + "</a>" + "</td>");
                             out.println("</tr>");
