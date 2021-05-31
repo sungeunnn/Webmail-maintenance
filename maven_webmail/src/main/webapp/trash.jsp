@@ -54,7 +54,7 @@
                         String dbPassword = "jspteamproject!!!";
                         Class.forName("com.mysql.jdbc.Driver");
                         conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
-                        String sql = "SELECT* FROM trash WHERE receiver=?";
+                        String sql = "SELECT* FROM TRASH WHERE receiver=?";
                         psmt = conn.prepareStatement(sql);
                         psmt.setString(1, userid);
                         ResultSet rs = psmt.executeQuery();

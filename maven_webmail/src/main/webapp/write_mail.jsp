@@ -28,10 +28,12 @@
         <jsp:include page="header.jsp" />
 
         <div id="sidebar">
+           
             <jsp:include page="sidebar_previous_menu.jsp" />
         </div>
         
         <div id="main">
+             <h3>메일 보내기</h3>
             <form enctype="multipart/form-data" method="POST"  name="send_form"
                   action="WriteMail.do?menu=<%= CommandType.SEND_MAIL_COMMAND%>" >
                 <table>

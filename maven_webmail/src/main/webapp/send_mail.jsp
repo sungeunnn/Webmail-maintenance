@@ -30,6 +30,7 @@
         </div>
 
         <div id="main">
+            <h3>보낸메일함</h3>
             <table border="1">
                 <thead>
                     <tr>

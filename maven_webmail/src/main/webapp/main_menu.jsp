@@ -37,6 +37,7 @@
         </div>
 
         <div id="main">
+            <h3>받은메일함</h3>
             <table border="1">
                 <thead>
                     <tr>

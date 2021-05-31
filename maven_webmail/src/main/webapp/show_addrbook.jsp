@@ -25,7 +25,7 @@
         </div>
         <div id="main">
             
-            <h2>주소록</h2>
+            <h3>주소록</h3>
             <c:catch var="errorReason">  
                 <mytags:addrbook userid= "${userid}"
                 addAddrMenu="<%= CommandType.ADD_ADDR_MENU%>" 
