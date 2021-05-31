@@ -6,7 +6,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="cse.maven_webmail.control.CommandType" %>
 <%@page import="cse.maven_webmail.model.UserAdminAgent" %>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 
 <script type="text/javascript">
@@ -36,19 +36,21 @@
         <div id="main">
             <h2> 삭제할 사용자를 선택해 주세요. </h2> <br>
 
-            <!-- 아래 코드는 위와 같이 Java Beans와 JSTL을 이용하는 코드로 바꾸어져야 함 -->
-            <%
+             <%
                         String cwd =  this.getServletContext().getRealPath(".");
-                        UserAdminAgent agent = new UserAdminAgent("localhost", 4555, cwd);
             %>
+            
+            <jsp:useBean id="userlistAgent" scope="page" class="cse.maven_webmail.model.UserlistAgent"/>
+            <c:set target="${userlistAgent}" property="cwd" value="${cwd}" />
+            <jsp:setProperty name="userlistAgent" property="cwd" value="<%= cwd %>"/>
+            
             <form name="DeleteUser" action="UserAdmin.do?menu=<%=CommandType.DELETE_USER_COMMAND%>"
                   method="POST">
-                <%
-                            for (String userId : agent.getUserList()) {
-                                out.print("<input type=checkbox name=\"selectedUsers\" value=\"" + userId + "\" />");
-                                out.println(userId + " <br>");
-                            }
-                %>
+               <c:forEach items="${userlistAgent.getUserList()}" var="item">
+                   <input type="checkbox" name="selectedUsers" value="${item}"/>
+                   <c:out value="${item}"/>
+                   <br/> 
+               </c:forEach>
                 <br>
                 <input type="submit" value="제거" name="delete_command" onClick ="return getConfirmResult()"/>
                 <input type="reset" value="선택 전부 취소" />

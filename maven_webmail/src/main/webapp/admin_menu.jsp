@@ -3,8 +3,10 @@
     Author     : jongmin
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="UTF-8" language="java"%>
 <%@page import="cse.maven_webmail.model.UserAdminAgent"%>
+<%@page import="cse.maven_webmail.model.UserlistAgent"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 
@@ -23,18 +25,19 @@
 
         <div id="main">
             <h2> 메일 사용자 목록 </h2>
-            <!-- 아래 코드는 위와 같이 Java Beans와 JSTL을 이용하는 코드로 바꾸어져야 함 -->
-            
             <%
                         String cwd =  this.getServletContext().getRealPath(".");
-                        UserAdminAgent agent = new UserAdminAgent("localhost", 4555, cwd);
             %>
+            
+            <jsp:useBean id="userlistAgent" scope="page" class="cse.maven_webmail.model.UserlistAgent"/>
+            <c:set target="${userlistAgent}" property="cwd" value="${cwd}" />
+            <jsp:setProperty name="userlistAgent" property="cwd" value="<%= cwd %>"/>
+ 
             <ul>
-                <%
-                            for (String userId : agent.getUserList()) {
-                                out.println("<li>" + userId + "</li>");
-                            }
-                %>
+                 <c:forEach items="${userlistAgent.getUserList()}" var="item">
+                         <li>${item}</li>
+                 </c:forEach>
+                
             </ul>
         </div>
 

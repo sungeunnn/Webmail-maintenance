@@ -39,7 +39,7 @@
                         String dbPassword = "jspteamproject!!!";
                 Class.forName("com.mysql.cj.jdbc.Driver");
                 conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
-                String sql = "SELECT * FROM trash WHERE subject=? and date=?";
+                String sql = "SELECT * FROM TRASH WHERE subject=? and date=?";
 
                 psmt = conn.prepareStatement(sql);
                 psmt.setString(1, title);

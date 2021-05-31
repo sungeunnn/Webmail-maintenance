@@ -3,6 +3,7 @@ cse\maven_webmail\model\FormParser.class
 cse\maven_webmail\control\DeleteMail.class
 cse\maven_webmail\control\LoginHandler.class
 cse\maven_webmail\model\UserAdminAgent.class
+cse\maven_webmail\model\UserlistAgent.class
 cse\maven_webmail\model\MessageFormatter.class
 cse\maven_webmail\control\RestoreMail.class
 cse\maven_webmail\control\ReadMailHandler.class

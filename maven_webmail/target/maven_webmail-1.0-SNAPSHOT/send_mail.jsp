@@ -30,6 +30,7 @@
         </div>
 
         <div id="main">
+            <h3>보낸메일함</h3>
             <table border="1">
                 <thead>
                     <tr>
@@ -63,7 +64,7 @@
                             out.println("<td>" + rs.getString("receiver") + "</td>");
                             out.println("<td>" + rs.getString("cc") + "</td>");
                             out.println("<td>" + "<a href=show_send_mail.jsp?title=" + URLEncoder.encode(rs.getString("subject"),"UTF-8") + "&date="
-                            + URLEncoder.encode(rs.getString("date"),"UTF-8") + ">" + rs.getString("subject") + "</a>" + "</td>");
+                            + URLEncoder.encode(rs.getString("date"),"UTF-8") +"&receiver="+URLEncoder.encode(rs.getString("receiver"),"UTF-8") + ">" + rs.getString("subject") + "</a>" + "</td>");
                             out.println("<td>" + rs.getString("date") + "</td>");
                             out.println("<td>" + "<a href=delete_send_mail.jsp?receiver=" + URLEncoder.encode(rs.getString("receiver"),"UTF-8") + "&title="
                             + URLEncoder.encode(rs.getString("subject"),"UTF-8") + "&date=" + URLEncoder.encode(rs.getString("date"),"UTF-8") + ">" + "삭제" + "</a>" + "</td>");
