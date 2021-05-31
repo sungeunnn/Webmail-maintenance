@@ -21,8 +21,7 @@ import java.sql.ResultSet;
 
 /**
  *
- * @author jongmin
- * 메일 쓰기 기능
+ * @author jongmin 메일 쓰기 기능
  */
 public class WriteMailHandler extends HttpServlet {
 
@@ -70,7 +69,6 @@ public class WriteMailHandler extends HttpServlet {
                 } else {
                     subject = parser.getSubject();
                 }
-                String date = new java.util.Date().toString();
                 String body = parser.getBody().replace("<", "&lt;").replace(">", "&gt;");
 
                 if (receiver.contains(",")) {
@@ -105,9 +103,9 @@ public class WriteMailHandler extends HttpServlet {
 
     public void write(String userID, String receiver, String cc, String subject, String body) {
         try {
-                        String dbURL = "jdbc:mysql://34.64.170.168:3306/jspmail?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul";
-                        String dbID = "yoonjsp";
-                        String dbPassword = "jspteamproject!!!";
+            String dbURL = "jdbc:mysql://34.64.170.168:3306/jspmail?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul";
+            String dbID = "yoonjsp";
+            String dbPassword = "jspteamproject!!!";
             conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
             Class.forName("com.mysql.cj.jdbc.Driver");
             String SQL = "INSERT INTO `jspmail`.`SENT_MAILBOX` (`idx`, `username`, `receiver`, `cc`, `subject`, `body`) VALUES (?,?,?,?,?,?);";
@@ -129,9 +127,9 @@ public class WriteMailHandler extends HttpServlet {
 
     public void write(String userID, String[] receivers, String cc, String subject, String body) {
         try {
-                        String dbURL = "jdbc:mysql://34.64.170.168:3306/jspmail?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul";
-                        String dbID = "yoonjsp";
-                        String dbPassword = "jspteamproject!!!";
+            String dbURL = "jdbc:mysql://34.64.170.168:3306/jspmail?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul";
+            String dbID = "yoonjsp";
+            String dbPassword = "jspteamproject!!!";
             conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
             Class.forName("com.mysql.cj.jdbc.Driver");
             String SQL = "INSERT INTO `jspmail`.`SENT_MAILBOX` (`idx`, `username`, `receiver`, `cc` ,`subject`, `body`) VALUES (?,?,?,?,?,?);";
@@ -144,7 +142,7 @@ public class WriteMailHandler extends HttpServlet {
                 pstmt.setString(4, cc);
                 pstmt.setString(5, subject);
                 pstmt.setString(6, body);
-                
+
                 pstmt.executeUpdate();
             }
         } catch (Exception e) {
@@ -153,8 +151,6 @@ public class WriteMailHandler extends HttpServlet {
         //return -1;//데이터베이스 오류  
     }
 
-  
-    
     private boolean sendMessage(HttpServletRequest request) {
         boolean status = false;
 

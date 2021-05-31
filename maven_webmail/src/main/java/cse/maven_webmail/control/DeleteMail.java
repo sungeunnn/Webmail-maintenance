@@ -39,16 +39,16 @@ public class DeleteMail extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
             // 데이터베이스 연결
-                        String dbURL = "jdbc:mysql://34.64.170.168:3306/jspmail?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul";
-                        String dbID = "yoonjsp";
-                        String dbPassword = "jspteamproject!!!";
+            String dbURL = "jdbc:mysql://34.64.170.168:3306/jspmail?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul";
+            String dbID = "yoonjsp";
+            String dbPassword = "jspteamproject!!!";
             // 파라미터 불러오기
-            
+
             String receiver = request.getParameter("receiver");
             String title = request.getParameter("title");
             String date = request.getParameter("date");
             int check = 0;// DB Success or Fail Check
-            
+
             // 데이터 베이스 연결 및 쿼리문
             conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
             Class.forName("com.mysql.cj.jdbc.Driver");

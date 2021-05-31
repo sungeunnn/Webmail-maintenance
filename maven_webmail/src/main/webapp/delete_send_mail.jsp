@@ -12,26 +12,25 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>보낸 메일함 삭제</title>
     </head>
     <body>
         <%
-            
+
             Connection conn = null;
             PreparedStatement psmt = null;
             int check = 0;
-                        String dbURL = "jdbc:mysql://34.64.170.168:3306/jspmail?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul";
-                        String dbID = "yoonjsp";
-                        String dbPassword = "jspteamproject!!!";
+            String dbURL = "jdbc:mysql://34.64.170.168:3306/jspmail?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul";
+            String dbID = "yoonjsp";
+            String dbPassword = "jspteamproject!!!";
             Class.forName("com.mysql.cj.jdbc.Driver");
             conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
             String sql = "DELETE FROM SENT_MAILBOX WHERE receiver=? and subject=? and date =?";
             psmt = conn.prepareStatement(sql);
-            
+
             psmt.setString(1, request.getParameter("receiver"));
             psmt.setString(2, request.getParameter("title"));
             psmt.setString(3, request.getParameter("date"));
-            
 
             check = psmt.executeUpdate(); // 업데이트가 성공적으로 되면
 

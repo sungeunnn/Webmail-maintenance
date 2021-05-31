@@ -17,7 +17,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>보낸 메일함</title>
         <link type="text/css" rel="stylesheet" href="css/main_style.css" />
 
     </head>
@@ -63,11 +63,11 @@
                             out.println("<td>" + rs.getString("idx") + "</td>");
                             out.println("<td>" + rs.getString("receiver") + "</td>");
                             out.println("<td>" + rs.getString("cc") + "</td>");
-                            out.println("<td>" + "<a href=show_send_mail.jsp?title=" + URLEncoder.encode(rs.getString("subject"),"UTF-8") + "&date="
-                            + URLEncoder.encode(rs.getString("date"),"UTF-8") +"&receiver="+URLEncoder.encode(rs.getString("receiver"),"UTF-8") + ">" + rs.getString("subject") + "</a>" + "</td>");
+                            out.println("<td>" + "<a href=show_send_mail.jsp?title=" + URLEncoder.encode(rs.getString("subject"), "UTF-8") + "&date="
+                                    + URLEncoder.encode(rs.getString("date"), "UTF-8") + "&receiver=" + URLEncoder.encode(rs.getString("receiver"), "UTF-8") + ">" + rs.getString("subject") + "</a>" + "</td>");
                             out.println("<td>" + rs.getString("date") + "</td>");
-                            out.println("<td>" + "<a href=delete_send_mail.jsp?receiver=" + URLEncoder.encode(rs.getString("receiver"),"UTF-8") + "&title="
-                            + URLEncoder.encode(rs.getString("subject"),"UTF-8") + "&date=" + URLEncoder.encode(rs.getString("date"),"UTF-8") + ">" + "삭제" + "</a>" + "</td>");
+                            out.println("<td>" + "<a href=delete_send_mail.jsp?receiver=" + URLEncoder.encode(rs.getString("receiver"), "UTF-8") + "&title="
+                                    + URLEncoder.encode(rs.getString("subject"), "UTF-8") + "&date=" + URLEncoder.encode(rs.getString("date"), "UTF-8") + ">" + "삭제" + "</a>" + "</td>");
                             out.println("</tr>");
                         }
                         psmt.close();

@@ -13,7 +13,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>휴지통 메일 보기</title>
         <link type="text/css" rel="stylesheet" href="css/main_style.css" />
     </head>
     <body>
@@ -32,11 +32,10 @@
 
                 Connection conn = null;
                 PreparedStatement psmt = null;
-                int count = 0;
 
-                        String dbURL = "jdbc:mysql://34.64.170.168:3306/jspmail?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul";
-                        String dbID = "yoonjsp";
-                        String dbPassword = "jspteamproject!!!";
+                String dbURL = "jdbc:mysql://34.64.170.168:3306/jspmail?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul";
+                String dbID = "yoonjsp";
+                String dbPassword = "jspteamproject!!!";
                 Class.forName("com.mysql.cj.jdbc.Driver");
                 conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
                 String sql = "SELECT * FROM TRASH WHERE subject=? and date=?";
